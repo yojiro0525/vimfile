@@ -17,7 +17,7 @@ let g:lightline = {
         \   'filetype': 'LightlineFiletype',
         \   'fileencoding': 'LightlineFileencoding',
         \   'mode': 'LightlineMode'
-        \ }
+        \ },
         \ }
 
 function! LightlineModified()
@@ -63,6 +63,9 @@ endfunction
 '''
 
 [[plugins]]
+repo = 'halkn/lightline-lsp'
+
+[[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
 map <C-e> :NERDTreeToggle<CR>
@@ -101,6 +104,21 @@ call ddc#custom#patch_filetype('markdown', 'sourceParams', {
       \ 'around': {'maxSize': 100},
       \ })
 
+call ddc#custom#patch_global('sources', ['vim-lsp'])
+call ddc#custom#patch_global('sourceOptions', {
+    \ 'vim-lsp': {
+    \   'matchers': ['matcher_head'],
+    \   'mark': 'lsp',
+    \ },
+    \ })
+
+call ddc#custom#patch_filetype(['css'], {
+   \ 'sourceParams': {
+   \   'vim-lsp': {
+   \     'ignoreCompleteProvider': v:true,
+   \   },
+   \ },
+   \ })
 
 inoremap <silent><expr> <TAB>
 \ ddc#map#pum_visible() ? '<C-n>' :
@@ -123,3 +141,12 @@ repo = 'Shougo/ddc-matcher_head'
 
 [[plugins]]
 repo = 'Shougo/ddc-sorter_rank'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
