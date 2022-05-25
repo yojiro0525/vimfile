@@ -55,6 +55,8 @@ hi clear CursorLine
 "タブ移動
 nmap <C-n> gt
 nmap <C-p> gT
+"ノーマルモードに戻る
+inoremap jj <Esc>
 "文字コードをUFT-8に設定
 set fenc=utf-8
 " バックアップファイルを作らない
