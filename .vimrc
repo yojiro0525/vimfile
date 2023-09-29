@@ -49,7 +49,10 @@ endif
 syntax on
 set number
 set background=dark
-colorscheme hybrid 
+colorscheme molokai
+"colorscheme hybrid 
+"colorscheme pyceberg
+
 set cursorline
 hi clear CursorLine
 "タブ移動
@@ -77,12 +80,20 @@ set expandtab
 set tabstop=2
 " 行頭でのTab文字の表示幅
 set shiftwidth=2
+let loaded_matchparen = 1
+
 "python_indent
 autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python setl tabstop=4 expandtab shiftwidth=2 softtabstop=2
-autocmd FileType python setlocal commentstring=#\ %s
+autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4
 "ターミナル関係
 set splitbelow
 set termwinsize=7x0
+"F5でpython実行
+nmap <F5> :!python3 %
+"カーソルの設定
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
 "------------------------------------------------------------------------

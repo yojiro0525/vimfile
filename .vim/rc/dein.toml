@@ -79,77 +79,47 @@ let g:webdevicons_enable_nerdtree = 1
 '''
 
 [[plugins]]
-repo = 'Shougo/ddc.vim'
+repo = 'plasticboy/vim-markdown'
 hook_add = '''
-call ddc#custom#patch_global('sources', ['around'])
-
-call ddc#custom#patch_global('sourceOptions', {
-      \ '_': {
-      \   'matchers': ['matcher_head'],
-      \   'sorters': ['sorter_rank']},
-      \ })
-
-call ddc#custom#patch_global('sourceOptions', {
-      \ 'around': {'mark': 'A'},
-      \ })
-call ddc#custom#patch_global('sourceParams', {
-      \ 'around': {'maxSize': 500},
-      \ })
-
-call ddc#custom#patch_filetype(['c', 'cpp'], 'sources', ['around', 'clangd'])
-call ddc#custom#patch_filetype(['c', 'cpp'], 'sourceOptions', {
-      \ 'clangd': {'mark': 'C'},
-      \ })
-call ddc#custom#patch_filetype('markdown', 'sourceParams', {
-      \ 'around': {'maxSize': 100},
-      \ })
-
-call ddc#custom#patch_global('sources', ['vim-lsp'])
-call ddc#custom#patch_global('sourceOptions', {
-    \ 'vim-lsp': {
-    \   'matchers': ['matcher_head'],
-    \   'mark': 'lsp',
-    \ },
-    \ })
-
-call ddc#custom#patch_filetype(['css'], {
-   \ 'sourceParams': {
-   \   'vim-lsp': {
-   \     'ignoreCompleteProvider': v:true,
-   \   },
-   \ },
-   \ })
-
-inoremap <silent><expr> <TAB>
-\ ddc#map#pum_visible() ? '<C-n>' :
-\ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-\ '<TAB>' : ddc#map#manual_complete()
-
-inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
-
-call ddc#enable()
+let g:vim_markdown_folding_disabled = 1
 '''
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
+repo = 'previm/previm'
+hook_add = '''
+let g:previm_enable_realtime = 1
+let g:previm_open_cmd = '/opt/google/chrome/chrome'
+'''
 
 [[plugins]]
-repo = 'Shougo/ddc-around'
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+hook_add = '''
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+'''
 
 [[plugins]]
-repo = 'Shougo/ddc-matcher_head'
+repo = 'Yggdroot/indentLine'
 
 [[plugins]]
-repo = 'Shougo/ddc-sorter_rank'
+repo = 'luochen1990/rainbow'
+hook_add = '''
+let g:rainbow_active = 1
+'''
+[[plugins]]
+repo = 'kuroitu/pyceberg'
 
 [[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-
-[[plugins]]
-repo = 'shun/ddc-vim-lsp'
-
-[[plugins]]
-repo = 'tpope/vim-commentary'
+repo = 'tomasr/molokai'
+hook_add = '''
+let g:molokai_original = 1
+let g:rehash256 = 1
+'''
